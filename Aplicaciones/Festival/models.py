@@ -1,11 +1,16 @@
 from django.db import models
+from django.db import models
+
 class Artista(models.Model):
     nombre = models.CharField(max_length=100)
     biografia = models.TextField()
-    redes_sociales = models.CharField(max_length=255)
+    genero = models.CharField(max_length=50)  # Este es el campo para el género
+    pais_origen = models.CharField(max_length=100)  # Este es el campo para el país de origen
+    redes_sociales = models.URLField(max_length=200)
 
     def __str__(self):
         return self.nombre
+
 
 class Festival(models.Model):
     nombre = models.CharField(max_length=100)

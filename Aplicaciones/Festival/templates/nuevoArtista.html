@@ -7,20 +7,42 @@
         <div class="col-md-4">
             <form action="{% url 'guardarArtista' %}" enctype="multipart/form-data" method="POST">
                 {% csrf_token %}
-                <label for="nombre"><b> Nombre: </b></label>
-                <input type="text" name="nombre" class="form-control" placeholder="Ingrese el nombre del artista">
                 
-                <label for="genero"><b> Género: </b></label>
-                <input type="text" name="genero" class="form-control" placeholder="Ingrese el género del artista">
+                <!-- Campo Nombre -->
+                <div class="mb-3">
+                    <label for="nombre"><b>Nombre:</b></label>
+                    <input type="text" name="nombre" class="form-control" placeholder="Ingrese el nombre del artista" required>
+                </div>
                 
-                <label for="pais_origen"><b> País de Origen: </b></label>
-                <input type="text" name="pais_origen" class="form-control" placeholder="Ingrese el país de origen">
+                <!-- Campo Género -->
+                <div class="mb-3">
+                    <label for="genero"><b>Género:</b></label>
+                    <input type="text" name="genero" class="form-control" placeholder="Ingrese el género del artista" required>
+                </div>
                 
-                <label for="foto"><b> Foto: </b></label>
-                <input type="file" name="foto" class="form-control" accept="image/*">
+                <!-- Campo País de Origen -->
+                <div class="mb-3">
+                    <label for="pais_origen"><b>País de Origen:</b></label>
+                    <input type="text" name="pais_origen" class="form-control" placeholder="Ingrese el país de origen" required>
+                </div>
                 
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <a href="{% url 'ListadoArtista' %}" class="btn btn-danger">Cancelar</a>
+                <!-- Campo Biografía -->
+                <div class="mb-3">
+                    <label for="biografia"><b>Biografía:</b></label>
+                    <textarea name="biografia" class="form-control" placeholder="Ingrese la biografía del artista" rows="3"></textarea>
+                </div>
+                
+                <!-- Campo Redes Sociales -->
+                <div class="mb-3">
+                    <label for="redes_sociales"><b>Redes Sociales:</b></label>
+                    <textarea name="redes_sociales" class="form-control" placeholder="Ingrese las redes sociales del artista" rows="3"></textarea>
+                </div>
+                
+                <!-- Botones -->
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <a href="{% url 'ListadoArtista' %}" class="btn btn-danger">Cancelar</a>
+                </div>
             </form>
         </div>
     </div>

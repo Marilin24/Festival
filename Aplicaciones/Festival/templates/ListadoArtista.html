@@ -1,6 +1,6 @@
-{% extends "base.html" %}
-
+{% extends "./plantilla.html" %}
 {% block body %}
+
 <br>
 <div class="card">
     <div class="card-title text-center">
@@ -9,14 +9,13 @@
 </div>
 <br>
 <div class="text-end">
-  <a href="{% url 'CrearArtista' %}" class="btn btn-success">Agregar Artista</a>
+  <a href="{% url 'nuevoArtista' %}" class="btn btn-success">Agregar Artista</a>
 </div>
 <table style="margin-left: 25%; width: 50%;" class="table table-striped table-hover" id="tbl-artistas">
     <thead>
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Nombre</th>
-        <th scope="col">Foto</th>
         <th scope="col">Biografía</th>
         <th scope="col">Redes Sociales</th>
         <th scope="col">Acciones</th>
@@ -27,9 +26,6 @@
         <tr>
             <td>{{ artista.id }}</td>
             <td>{{ artista.nombre }}</td>
-            <td>
-                <img src="{{ artista.foto.url }}" alt="Foto" height="100px" width="100px">
-            </td>
             <td>{{ artista.biografia }}</td>
             <td>{{ artista.redes_sociales }}</td>
             <td>

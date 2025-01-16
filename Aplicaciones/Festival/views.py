@@ -7,33 +7,65 @@ def home(request):
 
 def listadoArtista(request):
     artista = Artista.objects.all()
-    return render(request, "artista/ListadoArtista.html", {'artista': artista})
+    return render(request, "ListadoArtista.html", {'artista': artista})
+
 
 def nuevoArtista(request):
-    return render(request, "artista/nuevoArtista.html")
+    return render(request, "nuevoArtista.html")
 
 def guardarArtista(request):
     if request.method == 'POST':
-        nombre = request.POST["nombre"]
-        descripcion = request.POST["descripcion"]
-        foto = request.FILES.get("foto")
-        Artista.objects.create(nombre=nombre, descripcion=descripcion, foto=foto)
-        messages.success(request, "Artista registrado exitosamente.")
-    return redirect('listadoArtista')
+        nombre = request.POST.get("nombre")
+        biografia = request.POST.get("biografia")
+        genero = request.POST.get("genero")
+        pais_origen = request.POST.get("pais_origen")
+        redes_sociales = request.POST.get("redes_sociales")
+
+        if not all([nombre, biografia, genero, pais_origen, redes_sociales]):
+            messages.error(request, "Por favor, complete todos los campos.")
+            return redirect('listadoArtista')
+
+        try:
+            Artista.objects.create(
+                nombre=nombre,
+                biografia=biografia,
+                genero=genero,  # Este campo ahora está en el modelo
+                pais_origen=pais_origen,  # Este campo ahora está en el modelo
+                redes_sociales=redes_sociales,
+            )
+            messages.success(request, "Artista registrado exitosamente.")
+            return redirect('listadoArtista')
+        except Exception as e:
+            messages.error(request, f"Error al guardar el artista: {e}")
+            return redirect('listadoArtista')
+        
+
 
 def editarArtista(request, id):
     artista = get_object_or_404(Artista, id=id)
-    return render(request, "artista/editarArtista.html", {'artista': artista})
+    return render(request, "editarArtista.html", {'artista': artista})
 
 def actualizarArtista(request):
     if request.method == 'POST':
         id = request.POST["id"]
         nombre = request.POST["nombre"]
-        descripcion = request.POST["descripcion"]
+        biografia = request.POST["biografia"]  # Cambiar a 'biografia' si así lo tienes en el modelo
+        genero = request.POST["genero"]
+        pais_origen = request.POST["pais_origen"]
+        redes_sociales = request.POST["redes_sociales"]
+
+        # Obtener el artista por su ID
         artista = get_object_or_404(Artista, id=id)
+
+        # Actualizar los valores del artista
         artista.nombre = nombre
-        artista.descripcion = descripcion
+        artista.biografia = biografia  # Asegúrate de que se usa 'biografia' y no 'descripcion'
+        artista.genero = genero
+        artista.pais_origen = pais_origen
+        artista.redes_sociales = redes_sociales
+        # Guardar los cambios
         artista.save()
+
         messages.success(request, "Artista actualizado exitosamente.")
     return redirect('listadoArtista')
 
@@ -45,9 +77,9 @@ def eliminarArtista(request, id):
 
 
 # VIEWS DE FESTIVAL
-def listadoFestivales(request):
+def listadoFestival(request):
     festivales = Festival.objects.all()
-    return render(request, "festival/listadoFestivales.html", {'festivales': festivales})
+    return render(request, "festival/listadoFestival.html", {'festivales': festivales})
 
 def nuevoFestival(request):
     return render(request, "festival/nuevoFestival.html")
@@ -59,7 +91,7 @@ def guardarFestival(request):
         lugar = request.POST["lugar"]
         Festival.objects.create(nombre=nombre, fecha=fecha, lugar=lugar)
         messages.success(request, "Festival registrado exitosamente.")
-    return redirect('listadoFestivales')
+    return redirect('listadoFestival')
 
 def editarFestival(request, id):
     festival = get_object_or_404(Festival, id=id)
@@ -77,13 +109,13 @@ def actualizarFestival(request):
         festival.lugar = lugar
         festival.save()
         messages.success(request, "Festival actualizado exitosamente.")
-    return redirect('listadoFestivales')
+    return redirect('listadoFestival')
 
 def eliminarFestival(request, id):
     festival = get_object_or_404(Festival, id=id)
     festival.delete()
     messages.success(request, "Festival eliminado exitosamente.")
-    return redirect('listadoFestivales')
+    return redirect('listadoFestival')
 
 
 # VIEWS DE PRESENTACION
@@ -105,7 +137,7 @@ def guardarPresentacion(request):
             hora=hora,
         )
         messages.success(request, "Presentación registrada exitosamente.")
-    return redirect('listadoPresentaciones')
+    return redirect('listadoPresentacion')
 
 def editarPresentacion(request, id):
     presentacion = get_object_or_404(Presentacion, id=id)
@@ -123,13 +155,13 @@ def actualizarPresentacion(request):
         presentacion.hora = hora
         presentacion.save()
         messages.success(request, "Presentación actualizada exitosamente.")
-    return redirect('listadoPresentaciones')
+    return redirect('listadoPresentacion')
 
 def eliminarPresentacion(request, id):
     presentacion = get_object_or_404(Presentacion, id=id)
     presentacion.delete()
     messages.success(request, "Presentación eliminada exitosamente.")
-    return redirect('listadoPresentaciones')
+    return redirect('listadoPresentacion')
 
 
 # VIEWS DE BOLETO
@@ -146,13 +178,13 @@ def guardarBoleto(request):
         tipo = request.POST["tipo"]
         Boleto.objects.create(precio=precio, tipo=tipo)
         messages.success(request, "Boleto registrado exitosamente.")
-    return redirect('listadoBoletos')
+    return redirect('listadoBoleto')
 
 def eliminarBoleto(request, id):
     boleto = get_object_or_404(Boleto, id=id)
     boleto.delete()
     messages.success(request, "Boleto eliminado exitosamente.")
-    return redirect('listadoBoletos')
+    return redirect('listadoBoleto')
 
 
 # VIEWS DE COMPRA
@@ -170,10 +202,10 @@ def guardarCompra(request):
         fecha = request.POST["fecha"]
         Compra.objects.create(boleto_id=boleto_id, usuario_id=usuario_id, fecha=fecha)
         messages.success(request, "Compra registrada exitosamente.")
-    return redirect('listadoCompras')
+    return redirect('listadoCompra')
 
 def eliminarCompra(request, id):
     compra = get_object_or_404(Compra, id=id)
     compra.delete()
     messages.success(request, "Compra eliminada exitosamente.")
-    return redirect('listadoCompras')
+    return redirect('listadoCompra')
