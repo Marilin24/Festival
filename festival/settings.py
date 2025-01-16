@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import pymysql
+pymysql.install_as_MySQLdb()
 
 from pathlib import Path
 
@@ -76,12 +78,14 @@ WSGI_APPLICATION = 'festival.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'festival.db',
+        'ENGINE': 'django.db.backends.mysql',  # Motor de base de datos MySQL
+        'NAME': 'festival',  # Nombre de tu base de datos
+        'USER': 'root',  # Usuario de tu base de datos (por defecto en XAMPP es 'root')
+        'PASSWORD': '',  # Contraseña de la base de datos (por defecto está vacío en XAMPP)
+        'HOST': '127.0.0.1',  # El host de la base de datos (en XAMPP es 'localhost' o '127.0.0.1')
+        'PORT': '3306',  # El puerto de MySQL (por defecto en XAMPP es 3306)
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 

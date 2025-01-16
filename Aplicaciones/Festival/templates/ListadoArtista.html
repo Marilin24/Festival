@@ -17,6 +17,7 @@
         <th scope="col">ID</th>
         <th scope="col">Nombre</th>
         <th scope="col">Biografía</th>
+        <th scope="col">genero</th>
         <th scope="col">Redes Sociales</th>
         <th scope="col">Acciones</th>
       </tr>
@@ -27,6 +28,7 @@
             <td>{{ artista.id }}</td>
             <td>{{ artista.nombre }}</td>
             <td>{{ artista.biografia }}</td>
+            <td>{{ artista.genero }}</td>
             <td>{{ artista.redes_sociales }}</td>
             <td>
                 <a href="{% url 'EditarArtista' artista.id %}" class="btn btn-warning">Editar</a>

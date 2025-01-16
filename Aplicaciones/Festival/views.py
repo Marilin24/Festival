@@ -13,6 +13,7 @@ def listadoArtista(request):
 def nuevoArtista(request):
     return render(request, "nuevoArtista.html")
 
+
 def guardarArtista(request):
     if request.method == 'POST':
         nombre = request.POST.get("nombre")
@@ -23,22 +24,22 @@ def guardarArtista(request):
 
         if not all([nombre, biografia, genero, pais_origen, redes_sociales]):
             messages.error(request, "Por favor, complete todos los campos.")
-            return redirect('listadoArtista')
+            return redirect('nuevoArtista')
 
         try:
             Artista.objects.create(
                 nombre=nombre,
                 biografia=biografia,
-                genero=genero,  # Este campo ahora está en el modelo
-                pais_origen=pais_origen,  # Este campo ahora está en el modelo
-                redes_sociales=redes_sociales,
+                genero=genero,
+                pais_origen=pais_origen,
+                redes_sociales=redes_sociales
             )
             messages.success(request, "Artista registrado exitosamente.")
             return redirect('listadoArtista')
         except Exception as e:
             messages.error(request, f"Error al guardar el artista: {e}")
-            return redirect('listadoArtista')
-        
+            return redirect('nuevoArtista')
+
 
 
 def editarArtista(request, id):
