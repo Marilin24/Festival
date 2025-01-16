@@ -19,7 +19,7 @@ def guardarArtista(request):
         foto = request.FILES.get("foto")
         Artista.objects.create(nombre=nombre, descripcion=descripcion, foto=foto)
         messages.success(request, "Artista registrado exitosamente.")
-    return redirect('listadoArtistas')
+    return redirect('listadoArtista')
 
 def editarArtista(request, id):
     artista = get_object_or_404(Artista, id=id)
@@ -35,13 +35,13 @@ def actualizarArtista(request):
         artista.descripcion = descripcion
         artista.save()
         messages.success(request, "Artista actualizado exitosamente.")
-    return redirect('listadoArtistas')
+    return redirect('listadoArtista')
 
 def eliminarArtista(request, id):
     artista = get_object_or_404(Artista, id=id)
     artista.delete()
     messages.success(request, "Artista eliminado exitosamente.")
-    return redirect('listadoArtistas')
+    return redirect('listadoArtista')
 
 
 # VIEWS DE FESTIVAL
