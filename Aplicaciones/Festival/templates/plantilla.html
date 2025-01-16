@@ -41,40 +41,9 @@
     
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">ArtistaApp</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'ListadoArtistas' %}">Artistas</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'ListadoFestival' %}">Festivales</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'ListadoPresentacion' %}">Presentaciones</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'gestionCompra' %}">Compras</a>
-          </li>     
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/index/">Inicio</a>
-          </li> 
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Buscar Artista" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Buscar</button>
-        </form>
-      </div>
-    </div>
   </nav><nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">ArtistaApp</a>
+      <a class="navbar-brand" href="/">Festival</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -82,7 +51,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'ListadoArtistas' %}">Artistas</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'ListadoArtista' %}">Artistas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'ListadoFestival' %}">Festivales</a>
@@ -91,7 +60,7 @@
             <a class="nav-link active" aria-current="page" href="{% url 'ListadoPresentacion' %}">Presentaciones</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'gestionCompra' %}">Compras</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'ListadoCompra' %}">Compras</a>
           </li>     
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/index/">Inicio</a>

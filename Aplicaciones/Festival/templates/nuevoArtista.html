@@ -1,27 +1,25 @@
 {% extends "plantilla.html" %}
 
 {% block body %}
-<h1>Editar Artista</h1>
+<h1>Nuevo Artista</h1>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
-            <form action="{% url 'procesoActualizacionArtista' %}" method="POST">
+            <form action="{% url 'guardarArtista' %}" enctype="multipart/form-data" method="POST">
                 {% csrf_token %}
-                <input type="hidden" name="id" value="{{artistaEditar.id}}">
-                
                 <label for="nombre"><b> Nombre: </b></label>
-                <input type="text" name="nombre" class="form-control" value="{{artistaEditar.nombre}}">
+                <input type="text" name="nombre" class="form-control" placeholder="Ingrese el nombre del artista">
                 
                 <label for="genero"><b> Género: </b></label>
-                <input type="text" name="genero" class="form-control" value="{{artistaEditar.genero}}">
+                <input type="text" name="genero" class="form-control" placeholder="Ingrese el género del artista">
                 
                 <label for="pais_origen"><b> País de Origen: </b></label>
-                <input type="text" name="pais_origen" class="form-control" value="{{artistaEditar.pais_origen}}">
+                <input type="text" name="pais_origen" class="form-control" placeholder="Ingrese el país de origen">
                 
                 <label for="foto"><b> Foto: </b></label>
                 <input type="file" name="foto" class="form-control" accept="image/*">
                 
-                <button type="submit" class="btn btn-warning">Actualizar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
                 <a href="{% url 'ListadoArtista' %}" class="btn btn-danger">Cancelar</a>
             </form>
         </div>

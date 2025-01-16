@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block body %}
+<br>
+<div class="card">
+    <div class="card-title text-center">
+        <h3><b>Listado de Compras</b></h3>
+    </div>
+</div>
+<br>
+<div class="text-end">
+  <a href="{% url 'CrearCompra' %}" class="btn btn-success">Agregar Compra</a>
+</div>
+<table style="margin-left: 25%; width: 50%;" class="table table-striped table-hover" id="tbl-compras">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Usuario</th>
+        <th scope="col">Boleto</th>
+        <th scope="col">Fecha Compra</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for compra in compras %}
+        <tr>
+            <td>{{ compra.id }}</td>
+            <td>{{ compra.id_usuario }}</td>
+            <td>{{ compra.id_boleto.tipo }} - {{ compra.id_boleto.id_festival.nombre }}</td>
+            <td>{{ compra.fecha_compra }}</td>
+            <td>{{ compra.cantidad }}</td>
+            <td>
+                <a href="{% url 'EditarCompra' compra.id %}" class="btn btn-warning">Editar</a>
+                <a href="{% url 'EliminarCompra' compra.id %}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar?')">Eliminar</a>
+            </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+</table>
+<script>
+    let table = new DataTable('#tbl-compras');
+</script>
+{% endblock %}
